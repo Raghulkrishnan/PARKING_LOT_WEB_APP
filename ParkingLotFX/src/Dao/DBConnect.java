@@ -15,27 +15,6 @@ public class DBConnect {
 	public Connection connect() throws SQLException {
 		return DriverManager.getConnection(url, username, password);
 	}
-
-//public class DBConnect  {
-//
-//	protected Connection connection;
-//	public Connection getConnection() {
-//		return connection;
-//	}
-//
-//	private static String url = "jdbc:mysql://www.papademas.net:3307/510fp";
-//	private static String username = "fp510";
-//	private static String password = "510";
-//
-//	public DBConnect() {
-//		try {
-//			connection = DriverManager.getConnection(url, username, password);
-//		} 
-//		catch (SQLException e) {
-//			System.out.println("Error creating connection to database: " + e);
-//			System.exit(-1);
-//		}
-//	}
 	
 	public void toggleUpdate(String level,String lot) {
 		String query = "update rag_shr_parking_lot  set "+level+"="+"1-"+level+" WHERE level ="+lot;
@@ -65,13 +44,13 @@ public class DBConnect {
 			connect().close();
 		}
 		catch(SQLException e) {
-			System.out.println("Not working");
+			System.out.println("Table already exists");
 		}
 	}
 	public boolean InsertUserData(String username,String password,String fname,String lname) throws SQLException{
 		
 //		First Creating Table
-//		CreateTable();
+		CreateTable();
 		
 	    //insert statement
 	    String query = "insert into rag_shr_parking_users (username, password, firstName, lastName)"

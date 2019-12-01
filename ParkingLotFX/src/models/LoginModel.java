@@ -35,8 +35,7 @@ public class LoginModel extends DBConnect {
 		   
 		   ResultSet rs = stmt.executeQuery();
 		   
-		   if(rs.next()) { 
-				//if(password.equals(rs.getString("password")) && username.equals(rs.getString("username"))) {
+		   if(rs.next()) { //using rs.next() because usually there will be no more rows. it will return false. If true, user_id is set  
 				user_id = rs.getInt("pid");
 				System.out.println("here : "+user_id);
 //				setAdmin(rs.getBoolean("admin"));
