@@ -28,7 +28,7 @@ public class DBConnect {
 		}
 	}
 
-	public void CreateTable() {
+	public void CreateUserTable() {
 		try {
 			System.out.println("Creating a table in the database...");
 			
@@ -47,10 +47,31 @@ public class DBConnect {
 			System.out.println("Table already exists");
 		}
 	}
+	
+	public void CreateParkingTable() {
+		try {
+			System.out.println("Creating a parking table in the database...");
+			
+			stmt = connect().createStatement();
+			
+			String sql = "CREATE TABLE rag_shr_parking_lot" +  "(pid INTEGER not NULL AUTO_INCREMENT," +
+					 "level INT(10)," + " slot_A INT(2)," +  " slot_B INT(2)," + 
+					 " slot_C INT(2)," + "slot_D INT(2)," + "PRIMARY KEY (pid))";
+			
+			stmt.executeUpdate(sql);
+			System.out.println("Parking table successfully created in the database!!!!!!!");
+			
+			connect().close();
+		}
+		catch(SQLException e) {
+			System.out.println("Parking table already exists");
+		}
+	}
+	
 	public boolean InsertUserData(String username,String password,String fname,String lname) throws SQLException{
 		
 //		First Creating Table
-		CreateTable();
+		CreateUserTable();
 		
 	    //insert statement
 	    String query = "insert into rag_shr_parking_users (username, password, firstName, lastName)"

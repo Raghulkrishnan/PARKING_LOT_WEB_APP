@@ -1,7 +1,7 @@
 package application;
 	
  
-import javafx.application.Application;
+import javafx.application.Application; 
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -10,7 +10,9 @@ import javafx.scene.layout.AnchorPane;
 
 public class Main extends Application {
 	public static Stage stage;
-	
+	public static void main(String[] args) {
+		launch(args);
+	}
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -26,7 +28,5 @@ public class Main extends Application {
 			System.out.println("Error occured while inflating view: " + e);
 		}
 	}
-	public static void main(String[] args) {
-		launch(args);
-	}
+	
 }
