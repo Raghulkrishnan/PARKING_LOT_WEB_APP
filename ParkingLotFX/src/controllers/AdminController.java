@@ -58,16 +58,27 @@ public class AdminController extends DBConnect  {
 	    pane3.setVisible(false);
 	}	
 	
-	public void SubmitAdd() {
-		AddLevel();
-		System.out.println("Add Submit button pressed");
-	}	
-	
+	// Function to delete a level
 	public void SubmitDelete() {
-		RemoveLevel();
-		System.out.println("Delete Submit button pressed");
-	}	
-	
+		System.out.println("deleteOneLevel called");
+		// Check for no parking entries made in row
+		if (DeletionAllowed() > 0) {
+			RemoveLastLevel();
+//			msg.setText("Level Deleted!!");
+		}
+		// Inform inability to delete
+		else {
+//			msg.setText("Level cannot be deleted!!\nCheck occupancy");
+		}
+	}
+
+	// Function to add a level of parking
+	public void SubmitAdd() {
+		System.out.println("addOneLevel called");
+		AddLevel();
+//		msg.setText("Level Added!!");
+	}
+
 	public void SubmitUpdate() {
 		String level = this.txtField_Level.getText();
 		String slot = this.txtField_Slot.getText();
@@ -75,5 +86,6 @@ public class AdminController extends DBConnect  {
 		System.out.println(level + " " + slot);
 		System.out.println("Update Submit button pressed");
 	}	
+	
 	
 }

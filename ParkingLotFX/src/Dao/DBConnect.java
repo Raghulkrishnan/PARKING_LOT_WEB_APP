@@ -3,6 +3,7 @@ package Dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -30,39 +31,81 @@ public class DBConnect {
 		}
 	}
 	
-	public void RemoveLevel() {
-//		String query = "DELETE FROM parking_lot ORDER BY level DESC LIMIT 1";
-		try {
-			stmt = connect().createStatement();
-			
-			String sql = "DELETE FROM parking_lot ORDER BY level DESC LIMIT 1";
-			
-			stmt.executeUpdate(sql);
-			System.out.println("Table successfully cleared in the database!!!!!!!");
-			
-			connect().close();
-		}
-		catch(SQLException e) {
-			System.out.println("Unable to remove!");
-		}
-	}
-	
 	public void AddLevel() {
-		int rowCount = 0;
-		try {
-			stmt = connect().createStatement();
-			
-			String sql = "COUNT(*)";
-			
-			stmt.executeUpdate(sql);
-			
-			connect().close();
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
+		String id = GetMaxId();
+		int idInt = Integer.parseInt(id);
+		System.out.println(id);
+		if (!id.equals("error")) {
+			String query = "INSERT INTO parking_lot(level, slot_A, slot_B, slot_C, slot_D) VALUES (" + (idInt + 1)
+					+ ",'0','0','0','0')";
+			System.out.println(query);
+			try (PreparedStatement stmt = connect().prepareStatement(query)) {
+				int rs = stmt.executeUpdate();
+			} catch (SQLException e) {
+				System.out.println("exception");
+			}
 		}
 	}
 
+	public String GetMaxId() {
+		String query1 = "SELECT MAX(level) from parking_lot";
+		System.out.println(query1);
+		try (PreparedStatement stmt = connect().prepareStatement(query1)) {
+			System.out.println("connected");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String maxid = rs.getString(1);
+				return maxid;
+			}
+		} catch (SQLException e) {
+			System.out.println("Error" + e.getMessage());
+		}
+		return "error";
+	}
+	
+	public int DeletionAllowed() {
+		String id = GetMaxId();
+		int idInt = Integer.parseInt(id);
+		String query = "SELECT * from parking_lot  where level =" + idInt;
+		System.out.println(query);
+		try (PreparedStatement stmt = connect().prepareStatement(query)) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				int ide = rs.getInt(2);
+				int a = rs.getInt(3);
+				int b = rs.getInt(4);
+				int c = rs.getInt(5);
+				int d = rs.getInt(6);
+				System.out.print("Lvl" + ide + " A" + a + " B" + b + " C" + c + " D" + d );
+				if (a + b + c + d  == 0)
+					return 1;
+				else
+					return 0;
+			}
+		} catch (SQLException e) {
+			System.out.println("exception");
+		}
+		return -1;
+	}
+	
+	public void RemoveLastLevel() {
+		String id = GetMaxId();
+		int idInt = Integer.parseInt(id);
+		System.out.println(id);
+		if (!id.equals("error")) {
+			String query = "Delete from parking_lot where level =" + idInt;
+			System.out.println(query);
+			try (PreparedStatement stmt = connect().prepareStatement(query)) {
+
+				int rs = stmt.executeUpdate();
+
+			} catch (SQLException e) {
+				System.out.println("exception");
+			}
+		}
+	}
+	
+	
 	public void CreateUserTable() {
 		try {
 			System.out.println("Creating a table in the database...");
