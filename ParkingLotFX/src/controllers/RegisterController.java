@@ -50,7 +50,7 @@ public class RegisterController extends DBConnect{
 		
 		boolean success = InsertUserData(userId, pwd, firstName, lastName);
 		int uid = model.GetCredentials(userId, pwd);
-		
+		 
 		if(success) {
 			try {
 				AnchorPane root;
