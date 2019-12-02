@@ -8,7 +8,7 @@
 <AnchorPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserController">
    <children>
       <Button layoutX="94.0" layoutY="73.0" mnemonicParsing="false" onAction="#ViewParking" text="View Parking Lot" />
-      <Button layoutX="325.0" layoutY="73.0" mnemonicParsing="false" prefHeight="27.0" onAction="#BookParking" text="Create Booking" AnchorPane.rightAnchor="90.0" />
+      <Button layoutX="325.0" layoutY="73.0" mnemonicParsing="false" prefHeight="27.0" onAction="#BookParking" text="Book Parking Slot" AnchorPane.rightAnchor="90.0" />
       <Button layoutX="224.0" layoutY="383.0" mnemonicParsing="false" onAction="#Logout" prefHeight="27.0" prefWidth="134.0" text="Logout" AnchorPane.bottomAnchor="66.0" AnchorPane.leftAnchor="224.0" AnchorPane.rightAnchor="242.0" AnchorPane.topAnchor="383.0" />
    </children>
 </AnchorPane>

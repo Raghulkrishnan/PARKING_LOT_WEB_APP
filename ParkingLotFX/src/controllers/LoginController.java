@@ -67,9 +67,11 @@ public class LoginController {
 				Main.stage.setTitle("Admin View");
 			} 
 			else {
+				System.out.println(model.isAdmin());
+				System.out.println(isValid);
 				// If user is customer, inflate customer view
 				root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/UserView.fxml"));
-// 				CustomerController.setUser(user_id);
+ 				UserController.setUser(user_id);
 				Main.stage.setTitle("User View");
 			}
 

@@ -25,7 +25,7 @@ public class UserController extends DBConnect  {
 		UserController.userId = id;
 	}
 	
-	public void ViewParking() throws IOException {
+	public void ViewParking() {
 		UserModel user_model = new UserModel();
 		System.out.println(UserController.userId );
 		DynamicTable dyn_Table = new DynamicTable();
@@ -33,8 +33,7 @@ public class UserController extends DBConnect  {
 		CreateParkingTable();
 		
 		//call method from DynamicTable class and pass some arbitrary query string
-		dyn_Table.buildData("Select level,slot_A, slot_B, slot_C, slot_D from rag_shr_parking_lot",false);
-		
+		dyn_Table.buildData("Select level,slot_A, slot_B, slot_C, slot_D from parking_lot",false);
 	}
 	
 	public void BookParking() {
