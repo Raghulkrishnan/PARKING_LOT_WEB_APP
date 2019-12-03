@@ -5,16 +5,16 @@ public class ParkingLot {
 	String lot;
 	String level;
   
-	public int getBid() {
+	public int getBookingid() {
 		return bid;
 	}
-	public void setBid(int bid) {
+	public void setBookingid(int bid) {
 		this.bid = bid;
 	}
-	public String getLot() {
+	public String getSlot() {
 		return lot;
 	}
-	public void setLot(String lot) {
+	public void setSlot(String lot) {
 		this.lot = lot;
 	}
 	public String getLevel() {

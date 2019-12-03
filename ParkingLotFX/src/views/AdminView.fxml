@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
@@ -11,54 +13,68 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
-   <children>
-       <Label layoutX="54.0" layoutY="56.0" text="Admin View" textFill="#286b35" />
-	   <Button layoutX="28.0" layoutY="77.0" mnemonicParsing="false" onAction="#ViewBookings" prefHeight="27.0" prefWidth="121.0" text="View Bookings" />
-	   
-	   <Button layoutX="30.0" layoutY="121.0" mnemonicParsing="false" onAction="#ViewParkingLot" text="View Parking Lot" />
-	   
-	   <Button layoutX="32.0" layoutY="173.0" mnemonicParsing="false" onAction="#UpdateParking" text="Update Parking" />
-	   <Button layoutX="34.0" layoutY="223.0" mnemonicParsing="false" onAction="#DeleteParking" prefHeight="27.0" prefWidth="110.0" text="Remove a level" />
-       <Button layoutX="36.0" layoutY="270.0" mnemonicParsing="false" onAction="#AddParking" prefHeight="27.0" prefWidth="110.0" text="Add a level" />
-       <Pane fx:id="pane1" layoutX="176.0" layoutY="65.0" prefHeight="282.0" prefWidth="375.0" style="-fx-border-color: Black; -fx-border-width: 1;" visible="false">
-     		<effect>
-            	<Glow level="0.67" />
-         	</effect>
-         
-         <children>
-            <Button layoutX="158.0" layoutY="229.0" mnemonicParsing="false" onAction="#SubmitUpdate" text="Submit" />
-            
-            <TextField fx:id="txtField_Level" layoutX="104.0" layoutY="151.0" />
-            <TextField fx:id="txtField_Slot" layoutX="104.0" layoutY="48.0" />
-            
-            <Label layoutX="109.0" layoutY="22.0" text="Enter Level" />
-            <Label layoutX="109.0" layoutY="109.0" text="Enter Lot" />
-            <Label layoutX="14.0" layoutY="234.0" text="Record toggle Lot?" textFill="#803131" />
-         </children> 
-      </Pane>
-      
-      <Pane fx:id="pane2" layoutX="176.0" layoutY="65.0" prefHeight="282.0" prefWidth="375.0" style="-fx-border-color: Blue; -fx-border-width: 1;" visible="false">
+<AnchorPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0094b4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
+	<children>
+		<Label layoutX="194.0" layoutY="14.0" text="Admin Screen" textFill="#0a0a0a">
+			<font>
+				<Font name="DecoType Naskh Regular" size="36.0" />
+			</font>
          <effect>
-            <Glow level="0.67" />
+            <Glow />
          </effect>
+		</Label>
+		
+		<Button layoutX="29.0" layoutY="104.0" mnemonicParsing="false" onAction="#ViewBookings" prefHeight="27.0" prefWidth="176.0" style="-fx-background-color: #2e9855; -fx-border-color: #000000;" text="View Bookings" textAlignment="CENTER" textFill="#f8f4f4">
+         <font>
+            <Font name="Farah Regular" size="13.0" />
+         </font></Button>
+
+		<Button layoutX="29.0" layoutY="179.0" mnemonicParsing="false" onAction="#ViewParkingLot" prefHeight="27.0" prefWidth="176.0" style="-fx-background-color: #2e9855; -fx-border-color: #000000;" text="View Parking Lot" textFill="#fcfafa">
+         <font>
+            <Font name="Farah Regular" size="13.0" />
+         </font></Button>
+		<Button layoutX="241.0" layoutY="406.0" mnemonicParsing="false" onAction="#LogoutAdmin" prefHeight="27.0" prefWidth="134.0" style="-fx-background-color: #E74C3C; -fx-border-color: #000000;" text="Logout" textFill="#f5f3f3" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="241.0" AnchorPane.rightAnchor="225.0" AnchorPane.topAnchor="406.0" />
+
+		<Button layoutX="31.0" layoutY="252.0" mnemonicParsing="false" onAction="#ToggleParking" prefHeight="27.0" prefWidth="176.0" style="-fx-background-color: #2e9855; -fx-border-color: #000000;" text="Update Parking " textFill="#f8f6f6">
+         <font>
+            <Font name="Farah Regular" size="13.0" />
+         </font></Button>
          
-         <children>
-	         <Button layoutX="145.0" layoutY="171.0" mnemonicParsing="false" onAction="#SubmitDelete" text="Remove level" />
-	         <Label layoutX="14.0" layoutY="176.0" text="Remove a level?" textFill="#803131" />
-         </children>
-      </Pane>
-      
-      <Pane fx:id="pane3" layoutX="198.0" layoutY="85.0" prefHeight="282.0" prefWidth="375.0" style="-fx-border-color: Blue; -fx-border-width: 1;" visible="false">
-         <effect>
-            <Glow level="0.67" />
-         </effect>
-         
-         <children>
-	         <Button layoutX="145.0" layoutY="171.0" mnemonicParsing="false" onAction="#SubmitAdd" text="Add a level" />
-	         <Label layoutX="14.0" layoutY="176.0" text="Add a level?" textFill="#803131" />
-         </children>
-      </Pane>
-      
-   </children>
+		<Button layoutX="30.0" layoutY="320.0" mnemonicParsing="false" onAction="#EditOptions" prefHeight="27.0" prefWidth="176.0" style="-fx-background-color: #2e9855; -fx-border-color: #000000;" text="Add/ Remove Parking Lot" textFill="#fcf8f8" />
+
+		<Pane fx:id="pane1" layoutX="217.0" layoutY="91.0" prefHeight="296.0" prefWidth="334.0" style="-fx-border-color: Black; -fx-border-width: 1;" visible="false">
+			<children>
+				<Button contentDisplay="CENTER" layoutX="110.0" layoutY="170.0" mnemonicParsing="false" onAction="#SubmitUpdate" style="-fx-background-color: #1A5276;" text="Change Status" textFill="WHITE" />
+				<TextField fx:id="txtField_Level" layoutX="104.0" layoutY="130.0" />
+				<TextField fx:id="txtField_Slot" layoutX="104.0" layoutY="70.0" />
+				
+				<Label layoutX="109.0" layoutY="50.0" text="Enter Level" />
+				<Label layoutX="109.0" layoutY="110.0" text="Enter Slot" />
+				
+				<Label layoutX="60.0" layoutY="10.0" text="This is for changing the parking slot entry" textFill="#0829ff">
+               <effect>
+                  <Glow />
+               </effect></Label>
+				<Label fx:id="lblError" layoutX="80.0" layoutY="240.0" text="" textFill="#803131">
+               <effect>
+                  <Glow />
+               </effect></Label>
+
+			</children>
+		</Pane>
+
+		<Pane fx:id="pane2" layoutX="217.0" layoutY="91.0" prefHeight="296.0" prefWidth="334.0" style="-fx-border-color: Blue; -fx-border-width: 1;" visible="false">
+			<children>
+				<Button layoutX="110.0" layoutY="150.0" mnemonicParsing="false" onAction="#DeleteLevel" prefWidth="120.0" style="-fx-background-color: #1A5276;" text="Delete Level" textFill="WHITE" />
+      				<Button layoutX="110.0" layoutY="100.0" mnemonicParsing="false" onAction="#AddLevel" prefWidth="120.0" style="-fx-background-color: #1A5276;" text="Add Level" textFill="WHITE" />
+				<Label fx:id="msg" layoutX="140.0" layoutY="240.0" textFill="#803131">
+               <effect>
+                  <Glow />
+               </effect></Label>
+			</children>
+		</Pane>
+	</children>
+   <effect>
+      <Glow />
+   </effect>
 </AnchorPane>

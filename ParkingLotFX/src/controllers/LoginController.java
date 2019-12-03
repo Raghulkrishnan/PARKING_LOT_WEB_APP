@@ -1,5 +1,5 @@
 package controllers;
-
+import java.util.Base64;
 import application.Main;
 import models.LoginModel;
 import javafx.fxml.FXML;
@@ -28,17 +28,20 @@ public class LoginController {
 		String username = this.userNameField.getText();
 		String password = this.passwordField.getText();
 		
+		//Hashcoding password
+		String hashedPswd = Base64.getEncoder().encodeToString(password.getBytes());
 
 		// Validations
 		if (username == null || username.trim().equals("")) {
-			errorLabelField.setText("Username Cannot be empty or spaces");
+			errorLabelField.setText("Username cannot be empty or just spaces.");
 			return;
-
 		}
+		
 		if (password == null || password.trim().equals("")) {
 			errorLabelField.setText("Password cannot be empty or just spaces.");
 			return;
 		}
+		
 		if (username == null || username.trim().equals("") && 
 		   (password == null || password.trim().equals(""))) {
 			errorLabelField.setText("Username or password cannot be empty or just spaces.");
@@ -67,8 +70,6 @@ public class LoginController {
 				Main.stage.setTitle("Admin View");
 			} 
 			else {
-				System.out.println(model.isAdmin());
-				System.out.println(isValid);
 				// If user is customer, inflate customer view
 				root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/UserView.fxml"));
  				UserController.setUser(user_id);

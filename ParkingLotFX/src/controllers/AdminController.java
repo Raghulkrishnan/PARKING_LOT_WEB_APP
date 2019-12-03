@@ -8,8 +8,13 @@ import com.mysql.jdbc.Connection;
 
 import Dao.DBConnect;
 import application.DynamicTable;
+import application.Main;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import models.UserModel;
 
@@ -25,67 +30,109 @@ public class AdminController extends DBConnect  {
 	private Pane pane2;
 	@FXML
 	private Pane pane3;
+	@FXML
+	private Label lblError;
+	@FXML
+	private Label msg;
 	
 	public AdminController() {}
 	
 	public void ViewBookings() {
 		DynamicTable d = new DynamicTable();
-		//call method from DynamicTable class and pass some arbitrary query string
-		d.buildData("Select bid,uid from parking_lot_bookings",false);
+		
+		CreateBookingsTable();
+		
+		d.buildData("Select * from parking_slot_bookings",false);
+		
+		pane1.setVisible(false);
+		pane2.setVisible(false);
 	}
 	
 	public void ViewParkingLot() {
 		DynamicTable d = new DynamicTable();
-		//call method from DynamicTable class and pass some arbitrary query string
-		d.buildData("Select level,slot_A,slot_B,slot_C,slot_D from parking_lot",false);	
-	}
-	
-	public void AddParking() {
-	    pane1.setVisible(false);
-	    pane2.setVisible(false);
-	    pane3.setVisible(true);
+		d.buildData("Select level,A,B,C,D from parking_slots",false);	
+
+		pane1.setVisible(false);
+		pane2.setVisible(false);
 	}
 	
 	public void UpdateParking() {
 		pane1.setVisible(true);
 		pane2.setVisible(false);
-		pane3.setVisible(false);
 	}
 	
-	public void DeleteParking() {
-	    pane1.setVisible(false);
-	    pane2.setVisible(true);
-	    pane3.setVisible(false);
-	}	
-	
-	// Function to delete a level
-	public void SubmitDelete() {
-		System.out.println("deleteOneLevel called");
-		// Check for no parking entries made in row
-		if (DeletionAllowed() > 0) {
-			RemoveLastLevel();
-//			msg.setText("Level Deleted!!");
-		}
-		// Inform inability to delete
-		else {
-//			msg.setText("Level cannot be deleted!!\nCheck occupancy");
-		}
+	public void ToggleParking() {
+		pane1.setVisible(true);
+		pane2.setVisible(false);
 	}
 
-	// Function to add a level of parking
-	public void SubmitAdd() {
-		System.out.println("addOneLevel called");
-		AddLevel();
-//		msg.setText("Level Added!!");
+//	add or remove parking button
+	public void EditOptions() {
+		pane1.setVisible(false);
+		pane2.setVisible(true);
+	}
+	
+	public void AddLevel() {
+		System.out.println("Add a level called");
+		AddNewLevel();
+		msg.setText("A new level has been added successfully !");
+	}
+
+	public void DeleteLevel() {
+		// Check if none of the slots in the level is occupied before removing
+		if (DeletionAllowed() > 0) {
+			RemoveLastLevel();
+			msg.setText("Level deleted successfully!");
+		}
+		else {
+			msg.setText("The level is occupied and cannot be deleted!");
+		}
 	}
 
 	public void SubmitUpdate() {
 		String level = this.txtField_Level.getText();
 		String slot = this.txtField_Slot.getText();
-		ToggleUpdate(level,slot);
-		System.out.println(level + " " + slot);
+
+		if ((level == null || level.trim().equals("")) || (slot == null || slot.trim().equals(""))) {
+			lblError.setText("Fields cannot be empty or spaces");
+			return;
+		}
+		if (!level.matches("[A-E]{1}")) {
+			lblError.setText("Incorrect slot entered.\na)Ranges only from A to D(Upper case)\nb)Single character is only accepted");
+			return;
+		}
+		if (!slot.matches("[0-9]+")) {
+			lblError.setText("Only numbers are accepted for levels");
+			return;
+		}
+		
+		if(CheckLevelExists(slot)) {
+			
+			ToggleUpdate(level, slot);
+			
+			if(RevertUserBooking(level,slot))
+				lblError.setText("User booking has been updated!");
+		}
+		else {
+			lblError.setText("Incorrect level. Select an existing level");
+		}
+		
 		System.out.println("Update Submit button pressed");
-	}	
+
+	}
 	
-	
+	// Function for logout
+	public void LogoutAdmin() {
+		try {
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+			Scene scene = new Scene(root);
+			Main.stage.setScene(scene);
+
+			Main.stage.setTitle("Login");
+		} 
+		catch (Exception e) {
+			System.out.println("Error occured while inflating view: " + e);
+		}
+	}
+
 }

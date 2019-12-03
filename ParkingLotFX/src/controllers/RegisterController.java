@@ -1,6 +1,7 @@
 package controllers;
 
 import java.sql.SQLException;
+import java.util.Base64;
 
 import Dao.DBConnect;
 import application.Main;
@@ -22,7 +23,7 @@ public class RegisterController extends DBConnect{
 	@FXML
 	private TextField lname;
 	@FXML
-	private TextField userid;
+	private TextField username;
 	@FXML
 	private Label regErrorLabel;
 
@@ -33,11 +34,40 @@ public class RegisterController extends DBConnect{
 	}
 	
 	public void Register() throws SQLException {
-		String firstName = this.fname.getText();
-		String lastName = this.lname.getText();
-		String pwd = this.password.getText();
-		String userId = this.userid.getText();
+		String firstName = this.fname.getText(), lastName = this.lname.getText(), pwd = this.password.getText(), userId = this.username.getText();
 		LoginModel model = new LoginModel();
+		
+		// Validations
+		if (firstName == null || firstName.trim().equals("")) {
+			regErrorLabel.setText("Firstname cannot be empty or spaces");
+			System.out.println(regErrorLabel);
+			return;
+
+		}
+		if (lastName == null || lastName.trim().equals("")) {
+			regErrorLabel.setText("Lastname cannot be empty or spaces");
+			System.out.println(regErrorLabel);
+			return;
+		}
+		if (userId == null || userId.trim().equals("")) {
+			regErrorLabel.setText("Username cannot be empty or spaces");
+			System.out.println(regErrorLabel);
+			return;
+		}
+		if (pwd == null || pwd.trim().equals("")) {
+			regErrorLabel.setText("Password cannot be empty or spaces");
+			System.out.println(regErrorLabel);
+			return;
+		}
+		if ((userId == null || userId.trim().equals(""))
+				&& (pwd == null || pwd.trim().equals(""))
+				&& (lastName == null || lastName.trim().equals(""))
+				&& (firstName == null || firstName.trim().equals(""))) {
+			
+			regErrorLabel.setText("Fields cannot be empty or spaces");
+			System.out.println(regErrorLabel);
+			return;
+		}
 		
 		int user_id= model.GetCredentials(userId, pwd);
 		
@@ -47,10 +77,13 @@ public class RegisterController extends DBConnect{
 			regErrorLabel.setText("User alredy exists!");
 			return;
 		}
+
+		//Hashcoding password
+		String hashedPwd = Base64.getEncoder().encodeToString(pwd.getBytes());
 		
 		boolean success = InsertUserData(userId, pwd, firstName, lastName);
 		int uid = model.GetCredentials(userId, pwd);
-		 
+
 		if(success) {
 			try {
 				AnchorPane root;
@@ -69,7 +102,17 @@ public class RegisterController extends DBConnect{
 			regErrorLabel.setText("Unable to create user");
 		
 		return;
-
+	}
+	
+	public void CancelRegistration() {
+		try {
+			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
+			Scene scene = new Scene(root);
+			Main.stage.setScene(scene);
+			Main.stage.setTitle("Login");
+		} catch (Exception e) {
+			System.out.println("Error occured while inflating view: " + e);
+		}
 	}
 
 }

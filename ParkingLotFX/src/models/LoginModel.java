@@ -8,14 +8,8 @@ import Dao.DBConnect;
 
 public class LoginModel extends DBConnect {
 	
-	DBConnect conn = null;
-	
 	private Boolean admin;
 
-	public LoginModel() {
-		conn = new DBConnect();
-	}
-	
 	public Boolean isAdmin() {
 		return admin;
 	}
@@ -28,9 +22,9 @@ public class LoginModel extends DBConnect {
 	   int user_id = -1;
 	   int u_admin;
 	   
-	   String query = "SELECT * FROM parking_lot_users WHERE username = ? and password = ?;";
+	   String query = "SELECT * FROM parking_slot_users WHERE username = ? and password = ?;";
 	   
-	   try(PreparedStatement stmt = conn.connect().prepareStatement(query)) {
+	   try(PreparedStatement stmt = connect().prepareStatement(query)) {
 		   
 		   stmt.setString(1, username);
 		   stmt.setString(2, password);
@@ -38,7 +32,7 @@ public class LoginModel extends DBConnect {
 		   ResultSet rs = stmt.executeQuery();
 		   
 		   if(rs.next()) { //using rs.next() because usually there will be no more rows. it will return false. If true, user_id is set  
-				user_id = rs.getInt("pid");
+				user_id = rs.getInt("id");
 				u_admin = rs.getInt("isAdmin");
 				
 				if(u_admin == 1)

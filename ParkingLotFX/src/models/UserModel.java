@@ -13,8 +13,8 @@ public class UserModel extends DBConnect implements User<ParkingLot>{
 	private String firstName;
 	private String lastName;
 	private int id;
-	private int cid;
-    private ParkingLot pt;
+	private int userId;
+    private ParkingLot pLot;
     DBConnect conn = null;
     
 	public UserModel() {}
@@ -23,8 +23,6 @@ public class UserModel extends DBConnect implements User<ParkingLot>{
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
-		
-		conn = new DBConnect();
 	}
 
 	public int getId() {
@@ -35,8 +33,8 @@ public class UserModel extends DBConnect implements User<ParkingLot>{
 		this.id = id;
 	}
 	
- 	public void setCid(int cid) {
-		this.cid = cid;
+ 	public void setUserid(int uid) {
+		this.userId = uid;
 	}
 
 	public String getFirstName() {
@@ -48,14 +46,14 @@ public class UserModel extends DBConnect implements User<ParkingLot>{
 	}
 
 
-	public List<UserModel> GetBookings(int cid) {
+	public List<UserModel> GetBookings(int uid) {
 		
 		List<UserModel> accounts  = new ArrayList<>();
 		
-		String query = "SELECT lot,level FROM parking_lot_bookings join users WHERE uid = ?;";
+		String query = "SELECT lot,level FROM parking_slot_bookings join users WHERE userId = ?;";
 		
 		try(PreparedStatement statement = conn.connect().prepareStatement(query)){
-            statement.setInt(1, cid);
+            statement.setInt(1, uid);
             ResultSet resultSet = statement.executeQuery();
             
             while(resultSet.next()) {
@@ -70,8 +68,8 @@ public class UserModel extends DBConnect implements User<ParkingLot>{
 	}
 
 	@Override
-	public ParkingLot getCustomerInfo() {
+	public ParkingLot GetCustomerInfo() {
 		// TODO Auto-generated method stub
-		return pt;
+		return pLot;
 	}
 }
