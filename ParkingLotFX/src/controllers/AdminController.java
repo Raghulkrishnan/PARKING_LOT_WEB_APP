@@ -82,7 +82,7 @@ public class AdminController extends DBConnect  {
 		// Check if none of the slots in the level is occupied before removing
 		if (DeletionAllowed() > 0) {
 			RemoveLastLevel();
-			msg.setText("Level deleted successfully!");
+			msg.setText("A level has been deleted successfully!");
 		}
 		else {
 			msg.setText("The level is occupied and cannot be deleted!");
