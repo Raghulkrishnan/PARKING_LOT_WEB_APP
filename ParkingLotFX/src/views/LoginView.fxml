@@ -11,10 +11,10 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #0094b4;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #6D32AB;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
    <children>
      <Label fx:id="errorLabelField" layoutX="201.0" layoutY="314.0" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" text="" />
-      <Button layoutX="231.0" layoutY="221.0" mnemonicParsing="false" onAction="#Login" prefHeight="27.0" prefWidth="167.0" style="-fx-background-color: #2e9855; -fx-border-color: #000000;" text="Login " textFill="#f8f8f8">
+      <Button layoutX="255.0" layoutY="221.0" mnemonicParsing="false" onAction="#Login" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: #39AD51; -fx-border-color: #39AD51;" text="Login " textFill="#ffffff">
          <font>
             <Font name="Farah Regular" size="14.0" />
          </font>
@@ -33,8 +33,8 @@
       </PasswordField>
       
       <Label fx:id="errorLabelField" layoutX="174.0" layoutY="305.0" prefHeight="17.0" prefWidth="338.0" text="" />
-      <Button layoutX="271.0" layoutY="269.0" mnemonicParsing="false" onAction="#RegisterUser" style="-fx-background-color: #CA6F1E; -fx-border-color: #000000;" text="New User?" textFill="#fffbfb" />
-      <Label layoutX="191.0" text="Parking Lot Reservation">
+      <Button layoutX="255.0" layoutY="269.0" prefHeight="17.0" prefWidth="150.0" mnemonicParsing="false" onAction="#RegisterUser" style="-fx-background-color: #32ABA9; -fx-border-color: #32ABA9;" text="Register" textFill="#ffffff" />
+      <Label layoutX="110.0" textFill="#ffffff" text="PARKING RESERVATION">
          <font>
             <Font name="DecoType Naskh Regular" size="36.0" />
          </font>
