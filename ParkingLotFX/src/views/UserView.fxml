@@ -37,7 +37,7 @@
          </effect>
         </Button>
         
-	  <Label fx:id="status" layoutX="172.0" layoutY="382.0" prefHeight="17.0" prefWidth="292.0" />
+	  <Label fx:id="status" layoutX="172.0" textFill="#ffffff" layoutY="382.0" prefHeight="17.0" prefWidth="292.0" />
       <Label alignment="CENTER" layoutX="208.0" layoutY="55.0" textFill="#ffffff" text="USER VIEW" textAlignment="CENTER">
          <effect>
             <Glow />
