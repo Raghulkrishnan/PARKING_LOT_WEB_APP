@@ -67,12 +67,14 @@ public class LoginController {
 			if (model.isAdmin() && isValid) {
 				// If user is admin, inflate admin view
 				root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/AdminView.fxml"));
+				System.out.println("Admin logged in succesfully!!");
 				Main.stage.setTitle("Admin View");
 			} 
 			else {
 				// If user is customer, inflate customer view
 				root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/UserView.fxml"));
  				UserController.setUser(user_id);
+ 				System.out.println("User logged in succesfully!!");
 				Main.stage.setTitle("User View");
 			}
 
