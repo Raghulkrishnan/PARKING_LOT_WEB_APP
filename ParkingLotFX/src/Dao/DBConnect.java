@@ -19,7 +19,7 @@ public class DBConnect {
 	}
 	
 	public void ToggleUpdate(String level,String slot) {
-		String query = "update  parking_slots  set " + level + "=" + "1-" + level + " WHERE level =" + slot;
+		String query = "update parking_slots set " + level + "=" + "1-" + level + " WHERE level =" + slot;
 
 		try(PreparedStatement stmt = connect().prepareStatement(query)) {
 			int rs = stmt.executeUpdate();	   
