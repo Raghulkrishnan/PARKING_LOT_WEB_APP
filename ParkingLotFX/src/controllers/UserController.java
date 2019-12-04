@@ -11,6 +11,7 @@ import com.sun.prism.paint.Color;
 
 
 import Dao.DBConnect;
+import Dao.DaoModel;
 import application.DynamicTable;
 import application.Main;
 import javafx.application.Platform;
@@ -57,7 +58,8 @@ public class UserController extends DBConnect  {
 	@FXML
 	private TableColumn<UserModel, String> balance;
 
- 
+	DaoModel dm = new DaoModel();
+	
 	public UserController() {}
 	
 	public static void setUser(int id){
@@ -69,7 +71,7 @@ public class UserController extends DBConnect  {
 		
 		DynamicTable dyn_Table = new DynamicTable();
 		
-		CreateParkingTable();
+		dm.CreateParkingTable();
 		
 		dyn_Table.buildData("Select level,A, B, C, D from parking_slots",false);
 	}

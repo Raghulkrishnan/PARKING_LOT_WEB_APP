@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Dao.DBConnect;
+import Dao.DaoModel;
 import application.DynamicTable;
 import application.Main;
 import javafx.fxml.FXML;
@@ -32,6 +33,8 @@ public class AdminController extends DBConnect  {
 	private Label lblError;
 	@FXML
 	private Label msg;
+	
+	DaoModel dm = new DaoModel();
 	
 	public AdminController() {}
 	
@@ -70,7 +73,7 @@ public class AdminController extends DBConnect  {
 	public void ViewBookings() {
 		DynamicTable d = new DynamicTable();
 		
-		CreateBookingsTable();
+		dm.CreateBookingsTable();
 		
 		d.buildData("Select * from parking_slot_bookings",false);
 		

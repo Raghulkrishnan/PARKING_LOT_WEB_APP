@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Base64;
 
 import Dao.DBConnect;
+import Dao.DaoModel;
 import application.Main;
 import models.LoginModel;
 import models.UserModel;
@@ -29,6 +30,8 @@ public class RegisterController extends DBConnect{
 
 	private UserModel model;
 
+	DaoModel dm = new DaoModel();
+	
 	public RegisterController() {
 		model = new UserModel();
 	}
@@ -81,7 +84,7 @@ public class RegisterController extends DBConnect{
 		//Hashcoding password
 		String hashedPwd = Base64.getEncoder().encodeToString(pwd.getBytes());
 		
-		boolean success = InsertUserData(userId, pwd, firstName, lastName);
+		boolean success = dm.InsertUserData(userId, pwd, firstName, lastName);
 		int uid = model.GetCredentials(userId, pwd);
 
 		if(success) {
