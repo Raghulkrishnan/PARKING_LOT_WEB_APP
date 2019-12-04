@@ -90,7 +90,7 @@ public class RegisterController extends DBConnect{
 		if(success) {
 			try {
 				AnchorPane root;
-				root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/UserView.fxml"));
+				root = (AnchorPane) FXMLLoader.load(getClass().getResource("/views/LoginView.fxml"));
 			
 				Main.stage.setTitle("User View");
 				Scene scene = new Scene(root);
