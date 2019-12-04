@@ -47,9 +47,7 @@ public class UserModel extends DBConnect implements User<ParkingLot>{
 
 
 	public List<UserModel> GetBookings(int uid) {
-		
 		List<UserModel> accounts  = new ArrayList<>();
-		
 		String query = "SELECT lot,level FROM parking_slot_bookings join users WHERE userId = ?;";
 		
 		try(PreparedStatement statement = conn.connect().prepareStatement(query)){
