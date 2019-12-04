@@ -11,16 +11,16 @@ public class ParkingLot {
 	public void setBookingid(int bid) {
 		this.bid = bid;
 	}
-	public String getSlot() {
-		return lot;
-	}
-	public void setSlot(String lot) {
-		this.lot = lot;
-	}
 	public String getLevel() {
 		return level;
 	}
 	public void setLevel(String level) {
 		this.level = level;
+	}
+	public String getSlot() {
+		return lot;
+	}
+	public void setSlot(String lot) {
+		this.lot = lot;
 	}
 }

@@ -35,58 +35,6 @@ public class AdminController extends DBConnect  {
 	
 	public AdminController() {}
 	
-	public void ViewBookings() {
-		DynamicTable d = new DynamicTable();
-		
-		CreateBookingsTable();
-		
-		d.buildData("Select * from parking_slot_bookings",false);
-		
-		pane1.setVisible(false);
-		pane2.setVisible(false);
-	}
-	
-	public void ViewParkingLot() {
-		DynamicTable d = new DynamicTable();
-		d.buildData("Select level,A,B,C,D from parking_slots",false);	
-
-		pane1.setVisible(false);
-		pane2.setVisible(false);
-	}
-	
-	public void UpdateParking() {
-		pane1.setVisible(true);
-		pane2.setVisible(false);
-	}
-	
-	public void ToggleParking() {
-		pane1.setVisible(true);
-		pane2.setVisible(false);
-	}
-
-//	add or remove parking button
-	public void EditOptions() {
-		pane1.setVisible(false);
-		pane2.setVisible(true);
-	}
-	
-	public void AddLevel() {
-		System.out.println("Add a level called");
-		AddNewLevel();
-		msg.setText("A new level has been added successfully !");
-	}
-
-	public void DeleteLevel() {
-		// Check if none of the slots in the level is occupied before removing
-		if (DeletionAllowed() > 0) {
-			RemoveLastLevel();
-			msg.setText("A level has been deleted successfully!");
-		}
-		else {
-			msg.setText("The level is occupied and cannot be deleted!");
-		}
-	}
-
 	public void SubmitUpdate() {
 		String level = this.txtField_Level.getText();
 		String slot = this.txtField_Slot.getText();
@@ -119,6 +67,58 @@ public class AdminController extends DBConnect  {
 
 	}
 	
+	public void ViewBookings() {
+		DynamicTable d = new DynamicTable();
+		
+		CreateBookingsTable();
+		
+		d.buildData("Select * from parking_slot_bookings",false);
+		
+		pane1.setVisible(false);
+		pane2.setVisible(false);
+	}
+	
+	public void ViewParkingLot() {
+		DynamicTable d = new DynamicTable();
+		d.buildData("Select level,A,B,C,D from parking_slots",false);	
+
+		pane1.setVisible(false);
+		pane2.setVisible(false);
+	}
+
+//	add or remove parking button
+	public void EditOptions() {
+		pane1.setVisible(false);
+		pane2.setVisible(true);
+	}
+	
+	public void UpdateParking() {
+		pane1.setVisible(true);
+		pane2.setVisible(false);
+	}
+	
+	public void ToggleParking() {
+		pane1.setVisible(true);
+		pane2.setVisible(false);
+	}
+	
+	public void AddLevel() {
+		System.out.println("Add a level called");
+		AddNewLevel();
+		msg.setText("A new level has been added successfully !");
+	}
+
+	public void DeleteLevel() {
+		// Check if none of the slots in the level is occupied before removing
+		if (DeletionAllowed() > 0) {
+			RemoveLastLevel();
+			msg.setText("A level has been deleted successfully!");
+		}
+		else {
+			msg.setText("The level is occupied and cannot be deleted!");
+		}
+	}
+
 	// Function for logout
 	public void LogoutAdmin() {
 		try {

@@ -1,8 +1,8 @@
 .root{
     -fx-font-size: 14pt;
     -fx-font-family: "Courier New";
-    -fx-base: rgb(143, 102, 219);
-    -fx-background: rgb(220, 200, 196);
+    -fx-base: rgb(142, 101, 217);
+    -fx-background: rgb(225, 190, 194);
 }
 
 .highlightedRow {
